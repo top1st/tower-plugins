@@ -1,32 +1,27 @@
 import { combineReducers } from 'redux';
 import { all, call } from 'redux-saga/effects';
 import {
-    ieoReducer,
-    rootIEOSaga,
-    StateIEO,
+    rootWalletLimitsSaga,
+    walletLimitsReducer,
+    WalletLimitsState,
 } from './';
-import {
-    currenciesReducer,
-    CurrenciesState,
-    rootCurrenciesSaga,
-} from './currencies';
 
-export * from './ieo';
-export * from './currencies';
+export * from './actions';
+export * from './reducer';
+export * from './selectors';
+export * from './sagas';
+export * from './types';
 
-export interface IEOPluginState {
-    ieoPlugin: StateIEO;
-    currencies: CurrenciesState;
+export interface WalletLimitsPluginState {
+    walletLimitsPlugin: WalletLimitsState;
 }
 
-export const ieoPluginReducer = combineReducers({
-    ieoPlugin: ieoReducer,
-    currencies: currenciesReducer,
+export const walletLimitPluginReducer = combineReducers({
+    walletLimitsPlugin: walletLimitsReducer,
 });
 
-export function* rootIEOPluginsSaga() {
+export function* rootWalletLimitsPluginsSaga() {
     yield all([
-        call(rootIEOSaga),
-        call(rootCurrenciesSaga),
+        call(rootWalletLimitsSaga),
     ]);
 }
